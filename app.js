@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const routes = require('./routes/post');
+const productRoutes = require('./routes/product');
 
 const app = express();
 
@@ -9,5 +10,6 @@ const app = express();
 app.use(bodyParser.json()); // application/json
 
 app.use('/post', routes);
+app.use('/', productRoutes);
 
 app.listen(8080);
