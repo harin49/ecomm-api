@@ -1,7 +1,5 @@
 //set-up elastic search
-const { Client } = require('@elastic/elasticsearch');
-const e = require('express');
-const client = new Client({ node: 'http://localhost:9200' });
+import { elasticClient } from "../services/elasticService";
 
 
 //search function
@@ -9,7 +7,7 @@ exports.search = async (req, res, next) => {
   try {
     const { body } = req;
     const { q } = body;
-    const { hits } = await client.search({
+    const { hits } = await elasticClient.search({
         index: 'products',
         body: {
             query: {
@@ -35,7 +33,7 @@ exports.index = async (req, res, next) => {
   try {
     const { body } = req;
     const { title, content } = body;
-    await client.index({
+    await elasticClient.index({
         index: 'products',
         body: {
             title,
